@@ -1,0 +1,32 @@
+workflows:
+  ios-unsigned-ipa:
+    name: Build unsigned iOS IPA
+    max_build_duration: 120
+    instance_type: mac_mini_m2
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - name: Generate iOS project files
+        script: |
+          flutter create --platforms=ios --project-name dsmfh_accounting --org com.example --no-pub .
+      - name: Get Flutter packages
+        script: |
+          flutter pub get
+      - name: Run tests
+        script: |
+          flutter test
+      - name: Build unsigned iOS app
+        script: |
+          flutter build ios --release --no-codesign
+      - name: Package unsigned IPA
+        script: |
+          rm -rf Payload Runner-unsigned.ipa
+          mkdir Payload
+          cp -R build/ios/iphoneos/Runner.app Payload/Runner.app
+          zip -qry Runner-unsigned.ipa Payload
+    artifacts:
+      - Runner-unsigned.ipa
+      - build/ios/iphoneos/Runner.app
+      - /tmp/xcodebuild_logs/*.log

@@ -16,7 +16,7 @@
 
 ## 重要说明
 
-本项目可以通过 GitHub Actions 在 macOS 云端构建 `Runner-unsigned.ipa`，但它是未签名 IPA。
+本项目可以通过 Codemagic 或 GitHub Actions 在 macOS 云端构建 `Runner-unsigned.ipa`，但它是未签名 IPA。
 
 没有 Apple Developer 账号、证书和描述文件时，iPhone 不能直接安装这个 IPA。要安装到真机，需要后续使用以下任一方式签名：
 
@@ -34,7 +34,19 @@ flutter test
 flutter run
 ```
 
-## 云端构建未签名 IPA
+## 使用 Codemagic 构建未签名 IPA
+
+1. 打开 `https://codemagic.io/` 并登录。
+2. 点击 `Add application`。
+3. 选择 GitHub，然后选择本仓库 `accounting-app`。
+4. 选择 `codemagic.yaml` 作为构建配置。
+5. 选择 workflow：`Build unsigned iOS IPA`。
+6. 点击 `Start new build`。
+7. 构建完成后，在 Artifacts 中下载 `Runner-unsigned.ipa`。
+
+Codemagic 配置文件位于 `codemagic.yaml`。
+
+## 使用 GitHub Actions 构建未签名 IPA
 
 1. 把本项目推送到 GitHub 仓库。
 2. 打开仓库的 `Actions` 页面。
