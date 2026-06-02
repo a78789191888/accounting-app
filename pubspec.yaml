@@ -1,0 +1,26 @@
+name: dsmfh_accounting
+description: A local-first bookkeeping app for iPhone with unsigned IPA cloud build support.
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  csv: any
+  file_picker: any
+  intl: any
+  path_provider: any
+  share_plus: any
+  shared_preferences: any
+  uuid: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: any
+
+flutter:
+  uses-material-design: true
